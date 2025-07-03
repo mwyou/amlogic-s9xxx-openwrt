@@ -81,7 +81,7 @@ on:
 
 env:
   TZ: America/New_York
-  GITHUB_REPOSITORY: cotelforce/amlogic-s9xxx-openwrt
+  GITHUB_REPOSITORY: mwyou/amlogic-s9xxx-openwrt
   
 jobs:
   build:
