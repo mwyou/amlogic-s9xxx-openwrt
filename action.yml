@@ -13,7 +13,7 @@ inputs:
   openwrt_board:
     description: "Select device board."
     required: false
-    default: "all"
+    default: "wxy-oect"
   kernel_repo:
     description: "Select kernel repository."
     required: false
@@ -21,15 +21,15 @@ inputs:
   kernel_usage:
     description: "Set the tags of the stable kernel."
     required: false
-    default: "stable"
+    default: "rk35xx"
   openwrt_kernel:
     description: "Select kernel version."
     required: false
-    default: "6.1.y_6.12.y"
+    default: "6.1.115"
   auto_kernel:
     description: "Auto use the latest kernel."
     required: false
-    default: "true"
+    default: "false"
   openwrt_size:
     description: "Set the rootfs size(Unit: MiB)."
     required: false
