@@ -81,7 +81,8 @@ on:
 
 env:
   TZ: America/New_York
-
+  GITHUB_REPOSITORY: cotelforce/amlogic-s9xxx-openwrt
+  
 jobs:
   build:
     runs-on: ubuntu-22.04
