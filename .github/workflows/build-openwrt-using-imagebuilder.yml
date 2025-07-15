@@ -15,7 +15,7 @@ on:
       releases_branch:
         description: "Select the releases branch"
         required: false
-        default: "openwrt:24.10.2"
+        default: "immortalwrt:24.10.2"
         type: choice
         options:
           - openwrt:24.10.2
@@ -27,7 +27,7 @@ on:
       openwrt_board:
         description: "Select device board"
         required: false
-        default: "all"
+        default: "wxy-oect"
         type: choice
         options:
           - all
