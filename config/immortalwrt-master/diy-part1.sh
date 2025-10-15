@@ -12,3 +12,7 @@
 # other
 # rm -rf package/emortal/{autosamba,ipv6-helper}
 
+set -e
+# 追加第三方 feed：sundaqiang
+grep -q 'sundaqiang/openwrt-packages' feeds.conf.default || \
+echo 'src-git sundaqiang https://github.com/sundaqiang/openwrt-packages' >> feeds.conf.default
