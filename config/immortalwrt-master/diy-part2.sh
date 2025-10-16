@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #========================================================================================================================
 # https://github.com/ophub/amlogic-s9xxx-openwrt
 # Description: Automatically Build OpenWrt
@@ -57,6 +58,10 @@ ensure_y CONFIG_PACKAGE_luci-app-tailscale       # Tailscale 的 LuCI 网页管�
 ensure_y CONFIG_PACKAGE_qbittorrent              # qBittorrent 主程序，PT/BT 下载
 ensure_y CONFIG_PACKAGE_luci-app-qbittorrent     # qBittorrent 的 LuCI 管理界面
 
+# Aria2 下载器
+ensure_y CONFIG_PACKAGE_aria2                    # Aria2 多协议下载工具
+ensure_y CONFIG_PACKAGE_luci-app-aria2           # Aria2 的 LuCI 管理界面
+
 # WOL Plus 网页唤醒（来自 sundaqiang 源）
 ensure_y CONFIG_PACKAGE_luci-app-wolplus         # 网络唤醒插件，批量唤醒局域网设备
 
@@ -78,5 +83,16 @@ ensure_y CONFIG_PACKAGE_luci-ssl                 # LuCI HTTPS 支持
 ensure_y CONFIG_PACKAGE_ca-bundle                # CA 根证书包
 ensure_y CONFIG_PACKAGE_ca-certificates          # CA 证书包
 ensure_y CONFIG_PACKAGE_htop                     # htop 系统资源监控工具
+
+# Podman 容器引擎及相关组件
+ensure_y CONFIG_PACKAGE_podman                   # Podman 主程序，OCI 容器引擎
+ensure_y CONFIG_PACKAGE_conmon                   # Podman 运行时监控
+ensure_y CONFIG_PACKAGE_crun                     # OCI 容器运行时，推荐 crun
+ensure_y CONFIG_PACKAGE_fuse-overlayfs           # 镜像层存储，rootless 支持
+ensure_y CONFIG_PACKAGE_netavark                 # Podman/Netavark 网络组件
+ensure_y CONFIG_PACKAGE_external-protocol        # Podman 网络自动注册到防火墙
+ensure_y CONFIG_PACKAGE_uidmap                   # rootless 支持
+ensure_y CONFIG_PACKAGE_slirp4netns              # rootless 网络支持
+# ensure_y CONFIG_PACKAGE_aardvark-dns           # Podman DNS（如 feed 存在则启用）
 
 exit 0
