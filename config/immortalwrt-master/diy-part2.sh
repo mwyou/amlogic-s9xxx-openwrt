@@ -9,7 +9,7 @@
 # ------------------------------- Main source started -------------------------------
 #
 # Add the default password for the 'root' user（Change the empty password to 'password'）
-sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7:::/g' package/base-files/files/etc/shadow
+
 
 # Set etc/openwrt_release
 sed -i "s|DISTRIB_REVISION='.*'|DISTRIB_REVISION='R$(date +%Y.%m.%d)'|g" package/base-files/files/etc/openwrt_release
@@ -23,11 +23,60 @@ echo "DISTRIB_SOURCECODE='immortalwrt'" >>package/base-files/files/etc/openwrt_r
 # ------------------------------- Other started -------------------------------
 #
 # Add luci-app-amlogic
-rm -rf package/luci-app-amlogic
-git clone https://github.com/ophub/luci-app-amlogic.git package/luci-app-amlogic
+
 #
 # Apply patch
 # git apply ../config/patches/{0001*,0002*}.patch --directory=feeds/luci
 #
 # ------------------------------- Other ends -------------------------------
 
+ensure_y() {
+  sed -i "/^$1[=n|=m]/d" .config
+  grep -q "^$1=y" .config || echo "$1=y" >> .config
+}
+ensure_n() {
+  sed -i "/^$1[=y|=m]/d" .config
+  grep -q "^$1=n" .config || echo "$1=n" >> .config
+}
+
+# 禁用 frp 全家桶
+ensure_n CONFIG_PACKAGE_frpc             # frp 客户端，内网穿透
+ensure_n CONFIG_PACKAGE_frps             # frp 服务端，内网穿透
+ensure_n CONFIG_PACKAGE_luci-app-frpc    # frp 客户端的 LuCI 管理界面
+ensure_n CONFIG_PACKAGE_luci-app-frps    # frp 服务端的 LuCI 管理界面
+
+# Argon 主题与配置
+ensure_y CONFIG_PACKAGE_luci-theme-argon         # Argon 主题，美化 LuCI
+ensure_y CONFIG_PACKAGE_luci-app-argon-config    # Argon 主题配置插件，支持自定义背景等
+
+# Tailscale VPN
+ensure_y CONFIG_PACKAGE_tailscale                # Tailscale 主程序，支持 WireGuard Mesh
+ensure_y CONFIG_PACKAGE_luci-app-tailscale       # Tailscale 的 LuCI 网页管理插件
+
+# qBittorrent 下载器
+ensure_y CONFIG_PACKAGE_qbittorrent              # qBittorrent 主程序，PT/BT 下载
+ensure_y CONFIG_PACKAGE_luci-app-qbittorrent     # qBittorrent 的 LuCI 管理界面
+
+# WOL Plus 网页唤醒（来自 sundaqiang 源）
+ensure_y CONFIG_PACKAGE_luci-app-wolplus         # 网络唤醒插件，批量唤醒局域网设备
+
+# Samba4 文件共享
+ensure_y CONFIG_PACKAGE_luci-app-samba4          # Samba4 的 LuCI 管理界面
+ensure_y CONFIG_PACKAGE_samba4-server            # Samba4 服务端主程序
+ensure_y CONFIG_PACKAGE_samba4-libs              # Samba4 依赖库
+
+# FileBrowser Go 网页文件管理
+ensure_y CONFIG_PACKAGE_luci-app-filebrowser-go  # FileBrowser Go 的 LuCI 管理界面
+ensure_y CONFIG_PACKAGE_filebrowser-go           # FileBrowser Go 主程序
+
+# OpenList 网页列表管理（来自 sundaqiang 源）
+ensure_y CONFIG_PACKAGE_luci-app-openlist        # OpenList 列表管理插件
+
+# 常用基础包
+ensure_y CONFIG_PACKAGE_luci                     # LuCI 主界面
+ensure_y CONFIG_PACKAGE_luci-ssl                 # LuCI HTTPS 支持
+ensure_y CONFIG_PACKAGE_ca-bundle                # CA 根证书包
+ensure_y CONFIG_PACKAGE_ca-certificates          # CA 证书包
+ensure_y CONFIG_PACKAGE_htop                     # htop 系统资源监控工具
+
+exit 0
