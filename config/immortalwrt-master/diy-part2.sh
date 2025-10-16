@@ -85,14 +85,14 @@ ensure_y CONFIG_PACKAGE_ca-certificates          # CA 证书包
 ensure_y CONFIG_PACKAGE_htop                     # htop 系统资源监控工具
 
 # Podman 容器引擎及相关组件
-ensure_y CONFIG_PACKAGE_podman                   # Podman 主程序，OCI 容器引擎
-ensure_y CONFIG_PACKAGE_conmon                   # Podman 运行时监控
-ensure_y CONFIG_PACKAGE_crun                     # OCI 容器运行时，推荐 crun
-ensure_y CONFIG_PACKAGE_fuse-overlayfs           # 镜像层存储，rootless 支持
-ensure_y CONFIG_PACKAGE_netavark                 # Podman/Netavark 网络组件
-ensure_y CONFIG_PACKAGE_external-protocol        # Podman 网络自动注册到防火墙
-ensure_y CONFIG_PACKAGE_uidmap                   # rootless 支持
-ensure_y CONFIG_PACKAGE_slirp4netns              # rootless 网络支持
+# ensure_y CONFIG_PACKAGE_podman                   # Podman 主程序，OCI 容器引擎
+# ensure_y CONFIG_PACKAGE_conmon                   # Podman 运行时监控
+# ensure_y CONFIG_PACKAGE_crun                     # OCI 容器运行时，推荐 crun
+# ensure_y CONFIG_PACKAGE_fuse-overlayfs           # 镜像层存储，rootless 支持
+# ensure_y CONFIG_PACKAGE_netavark                 # Podman/Netavark 网络组件
+# ensure_y CONFIG_PACKAGE_external-protocol        # Podman 网络自动注册到防火墙
+# ensure_y CONFIG_PACKAGE_uidmap                   # rootless 支持
+# ensure_y CONFIG_PACKAGE_slirp4netns              # rootless 网络支持
 # ensure_y CONFIG_PACKAGE_aardvark-dns           # Podman DNS（如 feed 存在则启用）
 
 exit 0
