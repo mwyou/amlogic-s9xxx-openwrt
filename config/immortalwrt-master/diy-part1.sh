@@ -16,7 +16,10 @@ set -e
 # 追加第三方 feed
 grep -q 'sundaqiang/openwrt-packages' feeds.conf.default || \
 echo 'src-git sundaqiang https://github.com/sundaqiang/openwrt-packages' >> feeds.conf.default
-grep -q 'asvow/luci-app-tailscale' feeds.conf.default || \
-echo 'src-git tailscale_luci https://github.com/asvow/luci-app-tailscale.git' >> feeds.conf.default
+
+# 拉取 luci-app-tailscale（Tailscale 的 LuCI 管理界面，来源 asvow 项目）
+rm -rf package/luci-app-tailscale
+git clone --depth=1 https://github.com/asvow/luci-app-tailscale.git package/luci-app-tailscale
+
 grep -q 'kenzok8/openwrt-packages' feeds.conf.default || \
 echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >> feeds.conf.default
