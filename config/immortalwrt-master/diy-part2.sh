@@ -52,8 +52,8 @@ ensure_y CONFIG_PACKAGE_luci-theme-argon         # Argon 主题，美化 LuCI
 ensure_y CONFIG_PACKAGE_luci-app-argon-config    # Argon 主题配置插件，支持自定义背景等
 
 # Tailscale VPN
-ensure_y CONFIG_PACKAGE_tailscale                # Tailscale 主程序，支持 WireGuard Mesh
-ensure_y CONFIG_PACKAGE_luci-app-tailscale       # Tailscale 的 LuCI 网页管理插件
+# ensure_y CONFIG_PACKAGE_tailscale                # Tailscale 主程序，支持 WireGuard Mesh
+# ensure_y CONFIG_PACKAGE_luci-app-tailscale       # Tailscale 的 LuCI 网页管理插件
 
 # qBittorrent 下载器
 ensure_y CONFIG_PACKAGE_qbittorrent              # qBittorrent 主程序，PT/BT 下载
